@@ -16,6 +16,7 @@
       {% endif %}
       
 <!--       {::options parse_block_html="true" /} -->
+      {% raw %}{::options parse_block_html="true" /}{% endraw %}
       {{ content }}
 
       {% if site.github.private != true and site.github.license %}
