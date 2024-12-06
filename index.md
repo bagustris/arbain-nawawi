@@ -1,4 +1,4 @@
-# Syarah Arbain Nawawi Imam Ibn Daqiq
+# Syarah Arbain Nawawi oleh Ibn Daqiq
 
 1. [Hadist 1: IKHLAS](01.md)
 2. [Hadist 2: IMAN, ISLAM, IKHSAN](02.md)
@@ -17,4 +17,7 @@
 15. [Hadist 15: BERKATA YANG BAIK ATAU DIAM](15.md)
 16. [Hadist 16: TIDAK MUDAH MARAH](16.md)
 17. [Hadist 17: BERBUAT BAIK DALAM SEGALA URUSAN](17.md)
+18. [Hadist 18: MENYUSUL KESALAHAN DENGAN KEBAIKAN](18.md)
+19. [Hadist 19: MINTALAH TOLONG KEPADA ALLAH](19.md)
+20. [Hadist 20: MILIKILAH SIFAT MALU](20.md)
 
