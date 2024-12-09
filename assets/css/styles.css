@@ -13,6 +13,17 @@
 
 /* Update the CSS file to properly target Arabic text: */
 /* Target Arabic text specifically */
+
+@font-face {
+  font-family: 'Noto Naskh Arabic';
+  src: url('../fonts/NotoNaskhArabic-Regular.ttf') format('truetype'),
+       url('../fonts/NotoNaskhArabic-Bold.ttf') format('truetype');
+  font-weight: normal, bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 [lang='ar'], 
 [dir='rtl'] {
   font-family: 'Noto Naskh Arabic', serif;

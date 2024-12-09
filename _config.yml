@@ -33,4 +33,4 @@ exclude:
   - vendor/ruby/
 
 include:
-  - fonts
+  - assetts/fonts
