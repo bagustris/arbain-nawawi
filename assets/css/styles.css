@@ -1,4 +1,4 @@
-@import "fonts";
+/* @import "fonts"; */
 
 /* styles.css
 @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
@@ -6,9 +6,23 @@
 .droid-arabic-kufi {
   font-family: 'Droid Arabic Kufi', serif;
 } */
-
+/* 
 .naskh-font-loaded {
   body { font-family: Noto Naskh Arabic, sans-serif; }
+} */
+
+/* Update the CSS file to properly target Arabic text: */
+/* Target Arabic text specifically */
+[lang='ar'], 
+[dir='rtl'] {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 1.2em; /* Adjust size as needed */
+  line-height: 1.8;
+}
+
+/* Ensure proper RTL display */
+[dir='rtl'] {
+  text-align: right;
 }
 
 table {
