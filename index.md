@@ -1,5 +1,6 @@
 # Syarah Arbain Nawawi oleh Ibn Daqiq
 
+{:start="0"}
 0. [Pendahuluan](00.md)
 1. [Hadist 1: IKHLAS](01.md)
 2. [Hadist 2: IMAN, ISLAM, IKHSAN](02.md)
