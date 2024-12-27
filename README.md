@@ -1,6 +1,6 @@
 A raw of [Arbain Nawawi](https://bagustris.github.io/arbain-nawawi).
 
-Explanation or Arbain Nawai by Ibnu Daqiq Al-'Ied.  
+Explanation or Arbain Nawawi by Ibnu Daqiq Al-'Ied.  
 
 Technical information:  
 1. Contents are written in markdown files, see 1 to 42.md.  
