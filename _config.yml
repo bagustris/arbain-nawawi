@@ -18,6 +18,10 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+# Search configuration
+search:
+  enabled: true
+
 # Ensure GitHub Pages uses `jekyll` gem
 github:
   is_project_page: true

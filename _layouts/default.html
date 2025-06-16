@@ -8,12 +8,63 @@
     {% seo %}
     <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
+    <style>
+      .search-wrapper {
+        position: relative;
+      }
+      .form-control {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #d1d5da;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      .form-control:focus {
+        outline: none;
+        border-color: #0366d6;
+        box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
+      }
+      #search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #d1d5da;
+        border-radius: 6px;
+        box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+        z-index: 1000;
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 16px;
+      }
+      .search-result-item:last-child {
+        border-bottom: none !important;
+      }
+      .search-result-item h5 {
+        margin: 0 0 8px 0;
+      }
+      .search-result-item p {
+        margin: 0 0 4px 0;
+      }
+    </style>
   </head>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
       {% if site.title and site.title != page.title %}
       <h1><a href="{{ site.baseurl | default: site.url }}" aria-label="Return to homepage">{{ site.title }}</a></h1>
       {% endif %}
+
+      <!-- Search functionality -->
+      <div class="search-wrapper mb-4">
+        <div class="form-group">
+          <input type="text" id="search-input" placeholder="Search hadith..." class="form-control" />
+        </div>
+        <div id="search-results" class="mt-3" style="display: none;">
+          <h4>Search Results</h4>
+          <div id="search-results-list"></div>
+        </div>
+      </div>
 
       {{ content }}
 
@@ -25,5 +76,96 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
     <script>anchors.add();</script>
+    
+    <!-- Lunr.js for search -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const searchResultsList = document.getElementById('search-results-list');
+        
+        let searchIndex;
+        let searchData;
+        
+        // Load search data
+        fetch('{{ "/assets/search.json" | relative_url }}')
+          .then(response => response.json())
+          .then(data => {
+            searchData = data;
+            
+            // Build search index
+            searchIndex = lunr(function() {
+              this.ref('id');
+              this.field('title', { boost: 10 });
+              this.field('content');
+              this.field('excerpt');
+              this.field('categories');
+              this.field('tags');
+              
+              data.forEach(function(doc, idx) {
+                doc.id = idx;
+                this.add(doc);
+              }, this);
+            });
+          })
+          .catch(error => {
+            console.error('Error loading search data:', error);
+          });
+        
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+          const query = this.value.trim();
+          
+          if (query.length < 2) {
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          if (!searchIndex) {
+            searchResultsList.innerHTML = '<p>Search index is loading...</p>';
+            searchResults.style.display = 'block';
+            return;
+          }
+          
+          try {
+            const results = searchIndex.search(query);
+            displaySearchResults(results, query);
+          } catch (error) {
+            console.error('Search error:', error);
+            searchResultsList.innerHTML = '<p>Search error occurred.</p>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        function displaySearchResults(results, query) {
+          if (results.length === 0) {
+            searchResultsList.innerHTML = '<p>No results found for "' + query + '"</p>';
+          } else {
+            let html = '';
+            results.slice(0, 10).forEach(function(result) {
+              const item = searchData[result.ref];
+              html += '<div class="search-result-item mb-3 pb-3 border-bottom">';
+              html += '<h5><a href="' + item.url + '">' + item.title + '</a></h5>';
+              if (item.excerpt) {
+                html += '<p class="text-gray">' + item.excerpt + '</p>';
+              }
+              html += '<small class="text-gray">Score: ' + result.score.toFixed(2) + '</small>';
+              html += '</div>';
+            });
+            searchResultsList.innerHTML = html;
+          }
+          searchResults.style.display = 'block';
+        }
+        
+        // Hide search results when clicking outside
+        document.addEventListener('click', function(event) {
+          if (!searchResults.contains(event.target) && event.target !== searchInput) {
+            searchResults.style.display = 'none';
+          }
+        });
+      });
+    </script>
   </body>
 </html>

@@ -1,5 +1,7 @@
 # Syarah Arbain Nawawi oleh Ibn Daqiq
 
+**[🔍 Search Hadith](search.md)**
+
 {:start="0"}  
 0. [Pendahuluan](00.md)
 1. [Hadist 1: IKHLAS](01.md)
