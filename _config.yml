@@ -3,18 +3,19 @@ description: Syarah Arbain Nawawi oleh Ibn Daqiq
 baseurl: "/arbain-nawawi" # the subpath of your site, e.g. /blog
 url: "https://bagustris.github.io/arbain-nawawi" # the base hostname & protocol for your site
 
-theme: jekyll-theme-primer
+remote_theme: bagustris/primer2-theme
 
 # Build settings
 markdown: kramdown
-highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
-# Include custom CSS
 sass:
-  sass_dir: _sass
   style: compressed
 
 plugins:
+  - jekyll-remote-theme
   - jekyll-feed
   - jekyll-seo-tag
 
@@ -37,4 +38,4 @@ exclude:
   - vendor/ruby/
 
 include:
-  - assetts/fonts
+  - assets/fonts

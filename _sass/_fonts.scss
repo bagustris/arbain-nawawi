@@ -1,18 +1,15 @@
 @font-face {
-    font-family: "Noto Naskh Arabic";
-    font-style: normal;
-    font-weight: 400;
-    src: url("fonts/NotoNaskhArabic-Regular.woff2") format("woff2"),
-         url("fonts/NotoNaskhArabic-Regular.woff") format("woff"),
-         url("fonts/NotoNaskhArabic-Regular.ttf") format("truetype");
-  }
-  
-  @font-face {
-    font-family: "Noto Naskh Arabic";
-    font-style: bold;
-    font-weight: 700;
-    src: url("fonts/NotoNaskhArabic-Bold.woff2") format("woff2"),
-         url("fonts/NotoNaskhArabic-Bold.woff") format("woff"),
-         url("fonts/NotoNaskhArabic-Bold.ttf") format("truetype");
-  }
-  
+  font-family: "Noto Naskh Arabic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/NotoNaskhArabic-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Noto Naskh Arabic";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/NotoNaskhArabic-Bold.ttf") format("truetype");
+}
